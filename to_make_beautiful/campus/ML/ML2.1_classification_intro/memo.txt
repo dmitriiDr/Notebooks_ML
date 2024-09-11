@@ -1,0 +1,69 @@
+1) What are the necessary preprocessing steps regarding:
+a) classes ?
+
+unsupervised learning technique, you typically don’t deal with class labels directly because the goal is to discover inherent groupings in the data without prior knowledge of the labels.
+
+b) categorical features ?
+
+Categorical features represent discrete values, such as categories or groups. These need to be converted into a format that can be used by clustering algorithms.
+Encoding: Convert categorical features into numerical values
+    One-Hot Encoding: Creates binary columns for each category. This is useful for categorical  data with no ordinal relationship.
+    Ordinal Encoding: Assigns an integer value to each category. Use this if there is a natural order to the categories.
+    Binary Encoding: A compromise between one-hot encoding and ordinal encoding, useful for high cardinality categorical features.
+
+Handling High Cardinality: If a categorical feature has too many unique categories, it can lead to high-dimensionality problems
+    Grouping rare categories into an "Other" category.
+    Frequency encoding (replacing categories with their frequency counts).
+    
+Scaling: After encoding, categorical features might need to be scaled to ensure they contribute equally to the distance metrics used in clustering.   
+
+c) continuous features ?
+
+Continuous features are numerical and can take any value within a range. These features often require scaling to ensure that they contribute equally to the distance metric used by the clustering algorithm.
+
+Scaling:
+    Standardization (Z-score normalization): Centers the data around the mean (zero mean) and scales it to have unit variance. This is essential if features have different units or vastly different ranges.
+    Min-Max Scaling (Normalization): Scales the data to a specific range, usually [0, 1]. This is particularly useful if all features should contribute equally in a bounded space.
+    
+Handling Outliers: Outliers can skew the results of clustering
+    Removing outliers if they are errors or anomalies
+    Transformations (e.g., log transformation) to reduce the impact of outliers.
+
+Dimensionality Reduction:
+    if you have many continuous features, consider using dimensionality reduction techniques like PCA (Principal Component Analysis)
+    
+Feature Engineering:
+    creating new features or combining existing ones may lead to better results
+
+2) Confusion matrix:
+a)How many patient were incorrectly diagnosed with a Heart disease (false positives) ?
+
+5
+
+b)How many patient were incorrectly diagnosed as being Healthy (false negatives)?
+
+12
+
+3) Changing the threshold:
+a)What is the precision if we change the threshold to have a 0.95 recall ?
+
+0.48
+
+b) How many patient were incorrectly diagnosed as being Healthy (false negatives)?
+
+2
+
+4) Choosing an overall metric:
+
+a) If I can compute my test sample probabilities and care more about the positive class, which overall metric should I use to compare classifiers ?
+
+You should use Area Under the Receiver Operating Characteristic Curve (AUC-ROC) or Area Under the Precision-Recall Curve (AUC-PR)
+    AUC-ROC: This metric is widely used and gives you an idea of the model's ability to distinguish between classes across different threshold values. However, it may not always reflect performance well when dealing with imbalanced datasets.
+    AUC-PR: If the dataset is imbalanced and the positive class is much rarer, AUC-PR is more informative as it focuses on the precision and recall of the positive class.
+
+b) And if I only have the class predictions and no probabilities ?
+
+use metrics that focus on the performance related to the positive class
+    F1 Score: This is the harmonic mean of precision and recall and is a good metric when you need a balance between the two, particularly when dealing with imbalanced classes.
+    Precision: If false positives are more costly, and you want to minimize them, precision is a good choice.
+    Recall: If false negatives are more costly (i.e., missing the positive class), recall is preferable.
