@@ -1,0 +1,15 @@
+{
+    "color": {
+        "axes": "rgb(180, 180, 180)",
+        "highlight": "sandybrown",
+        "primary": "lightcoral",
+        "secondary": "lightsteelblue"
+    },
+    "family": "Courier New",
+    "line width": 2,
+    "size": {
+        "big": 20,
+        "medium": 16,
+        "small": 12
+    }
+}
