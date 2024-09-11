@@ -1,0 +1,27 @@
+WITH RankedAlbums AS (
+    SELECT
+        album,
+        artist,
+        date,
+        CAST(rank AS INT) AS rank,
+        strftime('%Y', date) AS year,
+        ROW_NUMBER() OVER (PARTITION BY strftime('%Y', date) ORDER BY CAST(rank AS INT)) AS rank_within_year
+    FROM
+        albums
+    WHERE
+        date >= date('now', '-20 years')
+)
+SELECT
+	album,
+	artist,
+    date,
+    rank
+FROM
+    RankedAlbums
+WHERE
+    rank_within_year = 1
+GROUP BY
+	album
+ORDER BY
+    year DESC,
+	rank ASC

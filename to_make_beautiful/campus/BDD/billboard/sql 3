@@ -1,0 +1,9 @@
+SELECT *, COUNT((date(date))) as week
+FROM albums
+WHERE rank = 1 /*Most weeks at Number One*/
+--WHERE 
+--	CAST(rank AS INT) <= 10 
+GROUP BY 
+	album
+ORDER BY 
+	week DESC
